@@ -18,21 +18,21 @@ function App() {
     <BrowserRouter>
 
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+        <Route path="/"  element={<Layout />}>
+          <Route index element={<Home />} /> 
+          {/* index tell that the route of the current component is the route of parent  which is here / .*/}
           <Route path="/about" element={<About />} />
           <Route path="/vans" element={<Vans />} />
           <Route path="/vans/:id" element={<VansDetail />} />
 
+          {/* The above route has path /vans/:id id is used to send value as parameter. here we have used "id" as a name so object will have key "id" */}
           <Route path="host" element={<HostLayout />} >
-          {/* So the child route is relative to the parent route we can remove / */}
-            <Route path="host" element={<Dashboard />} />
+            {/* So when the child route is relative to the parent route we can remove / */}
+            <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
-
-
-          {/* The above route has path /vans/:id id is used to send value as parameter. here we have used "id" as a name so object will have key "id" */}
+           {/* path with / means they are absolute and can stand alone like /about ,path without / means these route are related to its parent and doesnot stand alone /host/income */}
         </Route>
       </Routes>
 
