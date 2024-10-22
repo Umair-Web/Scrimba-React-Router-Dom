@@ -19,14 +19,14 @@ const HostVansDetails = () => {
             });
     }, [id]);
 
-   
+
     if (loading) {
-        return <p>Loading van details...</p>;  
+        return <p>Loading van details...</p>;
     }
 
-    
+
     if (!currentVan) {
-        return <p>Van not found.</p>; 
+        return <p>Van not found.</p>;
     }
 
     return (

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link,useLocation } from 'react-router-dom'
 //This is used to take out parameters from the url.
 const VansDetail = () => {
     const param = useParams()
     console.log("Params=>", param)
+
+    const location=useLocation()
+    console.log("Location=>",location)
 
     const [data, SetData] = useState(null);
     useEffect(() => {
@@ -12,10 +15,10 @@ const VansDetail = () => {
             .then(data => SetData(data.vans))
         console.log("Data=>", data)
     }, [param])
-
+  let search=location.state?.search || ''
     return (
         <div className="mx-8">
-            <Link to="/vans" className="hover:underline cursor-Linkointer">Back to all the vans</Link>
+            <Link to={`..${search}`} relative='path'  className="hover:underline cursor-Linkointer">Back to all the vans</Link>
 
             <div className="grid grid-cols-1 mt-4 mb-4">
 

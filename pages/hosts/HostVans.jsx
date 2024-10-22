@@ -14,7 +14,8 @@ const HostVans = () => {
             <h1 className="font-bold text-2xl text-[#161616]">Your listed vans</h1>
             <div className='mt-4'>
                 {hostvansData.map((van) => (
-                    <Link to={`/host/vans/${van.id}`}>
+                    // below we have previously used /host/vans/: but the route are nested and already following there parent and only change part is id so it changes to ont van.id and in the url it still be like /host/vans/:id
+                    <Link to={van.id}>
                         <div key={van.id} className='rounded-md my-2 p-2 bg-[#FFFFFF]'>
                             <div className='flex flex-row items-center gap-x-3'>
                                 <img className='h-16 w-16 object-contain' src={van.imageUrl} alt="" />

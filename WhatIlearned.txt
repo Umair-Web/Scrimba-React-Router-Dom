@@ -19,3 +19,5 @@ It's the "default route" we want to render when the path
 of the parent route matches. It gives us a chance to render
 an element inside the parent's <Outlet /> at the same path
 as the parent route.
+
+QueryParameters:Query parameters in React are key-value pairs added to the URL after a ?. They are used to pass extra information between pages in your app, like filters or search terms. You can access and use these parameters in your components to customize the content displayed.

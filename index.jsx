@@ -26,9 +26,9 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           {/* index tell that the route of the current component is the route of parent  which is here / .*/}
-          <Route path="/about" element={<About />} />
-          <Route path="/vans" element={<Vans />} />
-          <Route path="/vans/:id" element={<VansDetail />} />
+          <Route path="about" element={<About />} />
+          <Route path="vans" element={<Vans />} />
+          <Route path="vans/:id" element={<VansDetail />} />
 
           {/* The above route has path /vans/:id id is used to send value as parameter. here we have used "id" as a name so object will have key "id" */}
           <Route path="host" element={<HostLayout />} >
