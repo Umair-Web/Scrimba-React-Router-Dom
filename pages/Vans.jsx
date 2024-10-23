@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link,useSearchParams } from 'react-router-dom';
+import { getVans } from '../api';
 const Vans = () => {
 
 
 
   const [vansData, setVansData] = useState([]);
+  const [loading, setloading] = useState(false);
 
-  let [searchParams, setSearchParams] = useSearchParams();//
+  let [searchParams, setSearchParams] = useSearchParams();
+  // Search params is used to get the query parameters from the url
+
 
 
   const typeFilter=searchParams.get("type")//
@@ -17,13 +21,15 @@ const Vans = () => {
 
 
   useEffect(() => {
-    fetch('/api/vans')
+    async function loadvans() {
+      setloading(true)
+      const data=await getVans()
+      setVansData(data)
+      setloading(false)
+      
+    }
+    loadvans()
 
-      .then(res => res.json())
-
-      .then(data => setVansData(data.vans))
-
-    console.log("VansData=>", vansData)
   }, []);
 
   function handleFilterChange(key,value){
@@ -37,7 +43,11 @@ const Vans = () => {
       return prevParams
     })
   }
-
+  if(loading){
+    return (
+      <h1 className='mx-6 text-5xl'>Loading....</h1>
+    )
+  }
   return (
     <div className=" mx-4">
       <p className="text-3xl sm:text-4xl font-bold text-[#161616]">Explore our van options</p>
@@ -57,8 +67,8 @@ const Vans = () => {
 
         {/* Display van data */}
         {filtered.map((van) => (
-          <Link to={van.id} key={van.id} state={{search:`?${searchParams.toString()}`} }>
-            {/* State in Link is used to pass some kind of data between the links or any kind of that we want to reserve and use it somewhere else */}
+          <Link to={van.id} key={van.id} state={{search:`?${searchParams.toString()}`,type:typeFilter} }>
+            {/* State in Link is used to pass some kind of data between the links or any kind of that we want to reserve and use it somewhere else like when user when to go from one screen to another and wanted to pass some state then we can use it and utilize this state where the path specified  */}
             <img className="w-full object-contain" src={van.imageUrl} alt={van.name} />
             <div className="flex flex-row justify-between mt-3">
               <p className="font-semibold text-xl text-[#161616]">{van.name}</p>

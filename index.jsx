@@ -18,12 +18,15 @@ import HostVansDetails from './pages/hosts/HostVansDetails.jsx';
 import Details from './pages/hosts/Details.jsx';
 import Pricing from './pages/hosts/Pricing.jsx';
 import Photos from './pages/hosts/Photos.jsx';
+import Errorpage from './pages/Errorpage.jsx';
 function App() {
   return (
     <BrowserRouter>
 
       <Routes>
         <Route path="/" element={<Layout />}>
+           <Route path='*' element={<Errorpage/>}/>
+           {/* The above route is used when the existing doesnot match and we want to display some content here "*" means to catch all other routes. */}
           <Route index element={<Home />} />
           {/* index tell that the route of the current component is the route of parent  which is here / .*/}
           <Route path="about" element={<About />} />
