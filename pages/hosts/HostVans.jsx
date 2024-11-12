@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-const HostVans = () => {
-    const [hostvansData, setHostVansData] = useState([]);
-    useEffect(() => {
-        fetch('/api/host/vans')
-            .then(res => res.json())
-            .then(data => setHostVansData(data.vans))
-        console.log("HostVansData=>", hostvansData)
+import { Link,useLoaderData } from 'react-router-dom';
 
-    }, [])
+import { getHostVans } from '../../api';
+import { requireAuth } from '../../utils';
+export async function loader(){
+ await requireAuth()
+ return getHostVans()
+}
+// The above is named export and it helps to send multiple values.
+
+
+const HostVans = () => {
+
+   const hostvansData=useLoaderData()
+     
+    //----------------------------Old Logic---------------------
+    // const [hostvansData, setHostVansData] = useState([]);
+    // useEffect(() => {
+    //     fetch('/api/host/vans')
+    //         .then(res => res.json())
+    //         .then(data => setHostVansData(data.vans))
+    //     console.log("HostVansData=>", hostvansData)
+    // }, [])
+    //----------------------------Old Logic---------------------
+    
     return (
         <div className='mt-4'>
             <h1 className="font-bold text-2xl text-[#161616]">Your listed vans</h1>

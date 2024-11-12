@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { useOutletContext } from 'react-router-dom'
+// useOutletContext is used when we have passed some context to outlet and wanted to use that state.Since outlet is used to place our child route components, we can pass some state to outlet and can use this state in this manner.
 const Details = () => {
  const [details]=useOutletContext()
  console.log("Details,",details)

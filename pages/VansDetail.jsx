@@ -1,31 +1,50 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link,useLocation } from 'react-router-dom'
+import { useParams, Link,useLocation,useLoaderData } from 'react-router-dom'
 
 
-//This is used to take out parameters from the url.
+import { getVans } from '../api'
+export function loader({params}){
+    return getVans(params.id)
+}
+
 const VansDetail = () => {
-    const param = useParams()
-    console.log("Params=>", param)
-    // To get the query parameters from the url.
+
+   
+ 
 
     const location=useLocation()
     console.log("Location=>",location)
     // useLocation is used in order to get the state from the link which have passed some data to this screen in our case van's link have passed some state to van's detail page.
 
-    const [data, SetData] = useState(null);
 
+    // The Code below is the old logic that is used to fetch the data here let me tell you what is happening when user click on a link the components mount and useEffect run to get the data but it is a bad practice fortunately react-router provide a way to get data before compomemnt mounts.
 
-    useEffect(() => {
-        fetch(`/api/vans/${param.id}`)
-            .then(res => res.json())
-            .then(data => SetData(data.vans))
-        console.log("Data=>", data)
-    }, [param])
+    
+    // ----------------------------------------------
 
+    //This is used to take out parameters from the url.
+    // const param = useParams()
+    // console.log("Params=>", param)
+    // To get the query parameters from the url.
+
+    // const [data, SetData] = useState(null);
+
+    // useEffect(() => {
+    //     fetch(`/api/vans/${param.id}`)
+    //         .then(res => res.json())
+    //         .then(data => SetData(data.vans))
+    //     console.log("Data=>", data)
+    // }, [param])
+
+   // ----------------------------------------------
 
   let search=location.state?.search || ''
   
   let currentBusType=location.state?.type || 'all'
+
+
+  const data=useLoaderData()
+
     return (
         <div className="mx-8">
             <Link to={`..${search}`} relative='path'  className="hover:underline cursor-Linkointer">{`Back to ${currentBusType} vans`}</Link>
